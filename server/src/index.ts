@@ -13,12 +13,26 @@ dotenv.config();
 const app = express();
 
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello from root of the project");
-});
-app.use(helmet());
-app.use(cors());
+const allowedOrigins = [
+  process.env.CLIENT_URL
+];
+
+app.use(
+  cors({
+    credentials: true,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
+  })
+);
 app.use(express.json());
+app.use(helmet());
+
 app.use(limiter);
 
 

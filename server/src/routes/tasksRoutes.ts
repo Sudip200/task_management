@@ -21,6 +21,9 @@ router.use(authMiddleware);
 // GET /tasks
 router.get("/", taskController.getAll);
 
+// GET /tasks/stats
+router.get("/stats", taskController.stats);
+
 // POST /tasks
 router.post("/", validate(createTaskSchema), taskController.create);
 

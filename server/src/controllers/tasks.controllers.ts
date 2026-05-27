@@ -11,6 +11,11 @@ export const getAll = async (req: any, res: Response) => {
   res.json(tasks);
 };
 
+export const stats = async (req: any, res: Response) => {
+  const data = await taskService.getTaskStats(req.user.id);
+  res.json(data);
+};
+
 export const update = async (req: any, res: Response) => {
   const task = await taskService.updateTask(
     req.user.id,

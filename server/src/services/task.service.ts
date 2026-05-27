@@ -22,7 +22,7 @@ export const updateTask = async (userId: string, taskId: string, data: Partial<T
   return prisma.task.update({
     where: {
       id: taskId,
-      userId, // ensures user owns task
+      userId, 
     },
     data: {
       ...data,
